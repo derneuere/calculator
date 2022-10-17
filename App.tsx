@@ -4,7 +4,7 @@
  *
  * Generated with the TypeScript template
  * https://github.com/react-native-community/react-native-template-typescript
- *
+ * export ANDROID_HOME="/home/niaz/Android/Sdk/"
  * @format
  */
 
