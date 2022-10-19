@@ -9,14 +9,39 @@
  */
 
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, Pressable, Text, View} from 'react-native';
 
 const NumberButton = (props: {number: number; setCalculationNumber: any}) => {
   return (
-    <Button
-      title={props.number + ''}
-      onPress={() => props.setCalculationNumber(props.number)}
-    />
+    <Pressable
+      style={{
+        width: 100,
+        padding: 5,
+        borderRadius: 5,
+        margin: 5,
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+      }}
+      onPress={() => props.setCalculationNumber(props.number)}>
+      <Text style={{color: 'white'}}>{props.number}</Text>
+    </Pressable>
+  );
+};
+
+const OperationButton = (props: {operation: string; setOperation: any}) => {
+  return (
+    <Pressable
+      style={{
+        width: 100,
+        padding: 5,
+        borderRadius: 5,
+        margin: 5,
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+      }}
+      onPress={() => props.setOperation(props.operation)}>
+      <Text style={{color: 'white'}}>{props.operation}</Text>
+    </Pressable>
   );
 };
 
@@ -27,11 +52,10 @@ const App = () => {
   const [operation, setOperation] = React.useState('');
 
   const setCalculationNumber = (numberInput: number) => {
-    if (result == 0 && operation == '') {
-      setResult(numberInput);
+    if (operation == '') {
+      setResult(Number(result.toString() + numberInput.toString()));
     } else {
-      setNumber(numberInput);
-      calculate();
+      setNumber(Number(number.toString() + numberInput.toString()));
     }
   };
 
@@ -56,24 +80,72 @@ const App = () => {
       <Text>
         Calculation: {result} {operation} {number}
       </Text>
-      <Text>First Number: {number}</Text>
-      <Text>Operation: {operation}</Text>
-      <NumberButton number={1} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={2} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={3} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={4} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={5} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={6} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={7} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={8} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={9} setCalculationNumber={setCalculationNumber} />
-      <NumberButton number={0} setCalculationNumber={setCalculationNumber} />
-      <Button title="Add" onPress={() => setOperation('+')} />
-      <Button title="Subtract" onPress={() => setOperation('-')} />
-      <Button title="Multiply" onPress={() => setOperation('*')} />
-      <Button title="Divide" onPress={() => setOperation('/')} />
-      <Button title="Result" onPress={() => calculate()} />
-      <Button title="C" onPress={() => clear()} />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <NumberButton number={1} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={2} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={3} setCalculationNumber={setCalculationNumber} />
+        <OperationButton operation="+" setOperation={setOperation} />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <NumberButton number={4} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={5} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={6} setCalculationNumber={setCalculationNumber} />
+        <OperationButton operation="-" setOperation={setOperation} />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <NumberButton number={7} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={8} setCalculationNumber={setCalculationNumber} />
+        <NumberButton number={9} setCalculationNumber={setCalculationNumber} />
+        <OperationButton operation="*" setOperation={setOperation} />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <NumberButton number={0} setCalculationNumber={setCalculationNumber} />
+        <Pressable
+          style={{
+            width: 100,
+            padding: 5,
+            borderRadius: 5,
+            margin: 5,
+            backgroundColor: 'lightblue',
+            alignItems: 'center',
+          }}
+          onPress={() => calculate()}>
+          <Text style={{color: 'white'}}>Result</Text>
+        </Pressable>
+        <Pressable
+          style={{
+            width: 100,
+            padding: 5,
+            borderRadius: 5,
+            margin: 5,
+            backgroundColor: 'lightblue',
+            alignItems: 'center',
+          }}
+          onPress={() => clear()}>
+          <Text style={{color: 'white'}}>C</Text>
+        </Pressable>
+        <OperationButton operation="/" setOperation={setOperation} />
+      </View>
       <Button title="CE" onPress={() => clearAll()} />
     </View>
   );
