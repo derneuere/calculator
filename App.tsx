@@ -144,12 +144,12 @@ const App = () => {
             backgroundColor: 'lightblue',
             alignItems: 'center',
           }}
-          onPress={() => clear()}>
+          onPress={() => clearAll()}>
           <Text style={{color: 'white'}}>C</Text>
         </Pressable>
         <OperationButton operation="/" setOperation={setOperation} />
       </View>
-      <Button title="CE" onPress={() => clearAll()} />
+      <Button title="CE" onPress={() => clear()} />
     </View>
   );
 };
